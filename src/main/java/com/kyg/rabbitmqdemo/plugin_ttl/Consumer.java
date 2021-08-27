@@ -1,4 +1,4 @@
-package com.kyg.rabbitmqdemo.ttl;
+package com.kyg.rabbitmqdemo.plugin_ttl;
 
 import com.rabbitmq.client.Channel;
 import lombok.extern.slf4j.Slf4j;
@@ -12,15 +12,15 @@ import java.io.IOException;
  * @author: kongyigang
  * @Title: Consumer
  * @ProjectName: rabbitmq-demo
- * @Description: 延时队列消费者
- * @date: 2021/8/27 3:38 下午
+ * @Description: 消费者
+ * @date: 2021/8/27 10:27 下午
  */
-@Component
+@Component(value = "plugin-consumer")
 @Slf4j
-public class Consumer implements Constant{
+public class Consumer implements Constant {
 
-    @RabbitListener(queues = DEAD_QUEUE)
+    @RabbitListener(queues = DELAYED_QUEUE)
     public void consumer(Message message, Channel channel) {
         log.info("收到消息:" + new String(message.getBody()));
-        }
+    }
 }
